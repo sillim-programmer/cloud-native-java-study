@@ -3,6 +3,8 @@
 3장 12요소 애플리케이션 설정
 ===
 
+2018-07-13, 최범균(madvirus@madvirus.net)
+
 ---
 <!-- page_number: true -->
 
