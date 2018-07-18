@@ -370,6 +370,6 @@ incoming request: <GET https://route-service-zany-crocodile.cfapps.io/, {
 ```
 ---
 
-![](./스크린샷%202018-07-16%20오후%207.46.55.png)
+![](스크린샷%202018-07-16%20오후%207.46.55.png)
 
 기본적으로 약 640M 이상을 주어야 띄울 수 있지만 `JAVA_OPTS=-Xss256k`를 주면 512M 으로도 띄울 수 있음
