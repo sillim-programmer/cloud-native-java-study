@@ -57,12 +57,86 @@
 
 이 전체 흐름을 인가 코드 부여`authorization code grant`라고 한다. 이 흐름대로 하면 접근 코드의 유출을 막을 수 있따.
 
-## 인증을 담당하는 Spring Security
+## 기타 여러가지 상황
 
+### HTML5와 Single Page Application
+- URL fragment(#)을 이용한 토근 전달
+- 암시적 부여 `implicit grant`
 
+### 사용자 없는 애플리케이션
+- 클라이언트 정보만으로 접근 토큰 요청
+- 배치`batch` 또는 분석용 애플리케이션
+- 제한적으로 인증되고 권한 부여가 가능함
+- 클라이언트 인증 정보 부여 `client credentials grant`
 
+### 신뢰할 수 있는 클라이언트
+- 신뢰할 수 있는 클라이언트에게 아이디와 패스워드를 클라이언트에게 전달
+- 클라이언트가 인가서버에게 직접 아이디 패스워드를 전달하여 access token을 받는다
+- 자원 소유자 패스워드 인증정보 부여 `resource owner password credentials grant`
+- ex) 페이스북의 공식 모바일 앱
 
-## 메모
-유레카 먼저 키고
+## Spring Security
 
-그리팅 서비스 먼저 키고
+### 인증
+- 누가 요청을 보냈느냐에 대한 확인
+- 스프링 시큐리티가 그 역할을 담당
+- 모든 형태의 신원 확인 가능
+```text
+┌─────────────────────┐
+│AuthenticationManager│ 
+└─────────────────────┘
+        △
+        │
+┌───────────────┐
+│ProviderManager│ 
+└───────────────┘
+        │
+        ∨
+┌──────────────────────┐
+│AuthenticationProvider│ 
+└──────────────────────┘
+        △
+        │
+┌─────────────────────────────────────────┐
+│AbstractUserDetailsAuthenticationProvider│ 
+└─────────────────────────────────────────┘
+        △
+        │
+┌─────────────────────────┐
+│DaoAuthenticationProvider│ 
+└─────────────────────────┘
+        │
+        ∨
+┌─────────────────┐
+│UserDetailService│ 
+└─────────────────┘
+
+```
+- 기타 객체들 : UserDetails, GrantedAuthority(`인가`에 사용)
+
+### 인가
+- 요청자가 어떤 권한을 가지고 있는지 확인
+
+```
+┌─────────────────────┐
+│AccessDecisionManager│ 
+└─────────────────────┘
+        │
+        ∨
+┌─────────────────────┐
+│AccessDecisionManager│ 
+└─────────────────────┘
+```
+
+### 책임연쇄패턴 `Chain of Responsibilities`
+루트 인터페이스와 루트 인터페이스와 비슷하게 생긴 여러 인스턴스에게 세부적인 처리를 위임
+
+## 데모
+```bash
+git clone https://github.com/cloud-native-java/edge 
+```
+
+1. service-registry 실행
+2. greetings-service 실행 (profile: secure, zuul)
+3. edge-service 실행 (profile: secure, sso, feign)
+4. auth-service 실행
