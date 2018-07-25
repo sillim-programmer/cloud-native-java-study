@@ -389,7 +389,7 @@ public class RateLimiterZuulInboundFilter extends ZuulFilter {
             if(!rateLimiter.tryAcquire()) {
                 response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                 response.setStatus(tooManyRequests.value());
-//                response.getWriter().append(tooManyRequests.getReasonPhrase());
+                //response.getWriter().append(tooManyRequests.getReasonPhrase());
 
                 currentContext.setSendZuulResponse(false);
 
