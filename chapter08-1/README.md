@@ -310,6 +310,22 @@ greeting-service:
 
 -----
 
+## Zuul 1.x Filter Lifecycle
+<br>
+
+<img src="zuul 1.x.png" width=800px />
+
+
+-----
+
+## Zuul 2.x Filter Lifecycle
+<br>
+
+<img src="zuul 2.x.png" width=600px />
+
+-----
+
+
 <div style="font-size:75%">
 
 <br><br>
