@@ -261,3 +261,41 @@ public class CustomHealthIndicator implements HealthIndicator {
 * POST /actuator/loggers/{logger} 요청으로 runtime에 log level 변경 가능
 
 </div>
+
+----
+
+<div style="font-size:75%">
+
+## 분산 추적
+
+* 일체형 어플리케이션의 경우는 로그 추적이 쉬움
+* 분산 구조에서는 서비스간 호출이 많이 일어 남
+* 문제가 발생 했을 때 어디에서 문제가 생겼는지 파악이 쉽지 않음
+
+</div>
+
+----
+
+<div style="font-size:75%">
+
+## sleuth 
+
+* 서비스의 로깅을 지원하는 도구
+* serviceName, traceId, spanId, export 를 남김
+	* serviceName : 어플리케이션의 이름
+	* traceId : 하나의 요청에 대한 Id
+	* spanId : 작업 단위
+	* export : aggregator에서 export 될지 여부
+
+</div>
+
+----
+
+<div style="font-size:75%">
+
+## sleuth 
+
+<img src="./sleuth.png" />
+
+</div>
+
